@@ -1,6 +1,12 @@
+import { AttendeeList } from "./_components/attendee-list";
+import { Header } from "./_components/header";
+
 export function App() {
   return (
-    <h1>Hello World</h1>
+    <div className="max-w-[1216px] mx-auto py-5">
+      <Header />
+      <AttendeeList />
+    </div>
   )
 }
 
