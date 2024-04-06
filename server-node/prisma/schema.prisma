@@ -9,11 +9,26 @@ datasource db {
 
 // Define a criação da tabela Event renomeando para "events"
 model Event {
-  id String @id @default(uuid()) // uuid() é uma função que gera um id único para cada evento
-  title String
-  details String?
-  maximumAttendees Int? @map("maximum_attendees") // Define o número máximo de participantes
-  slug String @unique // slug é uma string que representa o título do evento em formato de URL
+  id               String     @id @default(uuid()) // uuid() é uma função que gera um id único para cada evento
+  title            String
+  details          String?
+  maximumAttendees Int?       @map("maximum_attendees") // Define o número máximo de participantes
+  slug             String     @unique // slug é uma string que representa o título do evento em formato de URL
+  attendees         Attendee[] // Define a relação entre o evento e os participantes
 
   @@map("events")
+}
+
+model Attendee {
+  id        Int      @id @default(autoincrement()) // autoincrement() é uma função que gera um id único para cada participante
+  name      String
+  email     String
+  createdAt DateTime @default(now()) @map("created_at") // now() é uma função que retorna a data e hora atual
+  eventId   String   @map("event_id") // Define a relação entre o participante e o evento
+
+  // Chave estrageira para o evento
+  // Ou seja, existe um relacionamento do campo id da tabela Event com o campo eventId da tabela Attendee
+  event Event @relation(fields: [eventId], references: [id])
+
+  @@map("attendees")
 }
