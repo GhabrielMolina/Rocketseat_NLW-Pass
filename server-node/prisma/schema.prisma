@@ -12,7 +12,7 @@ model Event {
   id String @id @default(uuid()) // uuid() é uma função que gera um id único para cada evento
   title String
   details String?
-  maximunAttendees Int? @map("maximun_attendees") // Define o número máximo de participantes
+  maximumAttendees Int? @map("maximum_attendees") // Define o número máximo de participantes
   slug String @unique // slug é uma string que representa o título do evento em formato de URL
 
   @@map("events")
