@@ -22,7 +22,7 @@ import { FastifyInstance } from "fastify";
 export async function createEvent(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>() // Adicionar o tipo de provider do Zod
-    .post('/events', { // Criar um evento
+    .post('/events', { // Criar um evento com a tabela Event (schema.prisma)
       schema: { // Definir o schema de validação
         body: z.object({ // Validar pelo fastify o corpo da requisição se está de acordo com o schema
           title: z.string().min(4),
@@ -65,5 +65,5 @@ export async function createEvent(app: FastifyInstance) {
 
       return reply.status(201).send({ eventId: event.id }); // 201 Created -> Registro criado com sucesso
     })
-}
+} // Registrar a rota de criação de eventos no server.ts
 

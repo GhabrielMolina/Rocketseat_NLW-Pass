@@ -1,8 +1,21 @@
+# Teste de Rotas
+
 POST http://localhost:3333/events
 Content-Type: application/json
 
+# Corpo da requisição
 {
   "title": "Unite Summit",
   "details": "A conference for Unity developers",
   "maximumAttendees": 100
+}
+
+###
+
+POST http://localhost:3333/events/cb11df56-2ab6-4189-b087-15187c3269d7/attendees
+Content-Type: application/json
+
+{
+  "name": "Ghabriel Molina",
+  "email": "ghabrielmolina@hotmail.com"
 }
