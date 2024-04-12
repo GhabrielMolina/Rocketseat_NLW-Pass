@@ -5,14 +5,14 @@ Content-Type: application/json
 
 # Corpo da requisição
 {
-  "title": "Unite Summit",
-  "details": "A conference for Unity developers",
-  "maximumAttendees": 100
+  "title": "New event 2",
+  "details": null,
+  "maximumAttendees": 1
 }
 
 ###
 
-POST http://localhost:3333/events/cb11df56-2ab6-4189-b087-15187c3269d7/attendees
+POST http://localhost:3333/events/2a645cbe-3a6d-4de9-ab80-ab140d6ff86e/attendees
 Content-Type: application/json
 
 {

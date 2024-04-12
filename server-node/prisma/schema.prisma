@@ -30,5 +30,6 @@ model Attendee {
   // Ou seja, existe um relacionamento do campo id da tabela Event com o campo eventId da tabela Attendee
   event Event @relation(fields: [eventId], references: [id])
 
+  @@unique([eventId, email]) // Permite criar uma chave de verificação única para os campos da tabela (Não poderá ter dois participantes com o mesmo email no mesmo evento)
   @@map("attendees")
 }
