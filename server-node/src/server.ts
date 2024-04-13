@@ -3,8 +3,9 @@ import fastify from 'fastify';
 // npm i @fastify/swagger && npm i @fastify/swagger-ui
 import fastifySwagger from '@fastify/swagger'; // https://github.com/fastify/fastify-swagger
 import fastifySwaggerUI from '@fastify/swagger-ui';
+import fastifyCors from '@fastify/cors'; // npm i @fastify/cors
 
-import { serializerCompiler, validatorCompiler, jsonSchemaTransform } from 'fastify-type-provider-zod'; // https://github.com/turkerdev/fastify-type-provider-zod
+import { serializerCompiler, validatorCompiler, jsonSchemaTransform, ZodTypeProvider } from 'fastify-type-provider-zod'; // https://github.com/turkerdev/fastify-type-provider-zod
 import { createEvent } from './routes/create-event';
 import { registerForEvent } from './routes/register-for-event';
 import { getEvent } from './routes/get-event';
@@ -13,7 +14,11 @@ import { checkIn } from './routes/check-in';
 import { getEventAttendees } from './routes/get-event-attendees';
 import { errorHandler } from './error-handler';
 
-const app = fastify();
+export const app = fastify().withTypeProvider<ZodTypeProvider>()
+
+app.register(fastifyCors, { 
+  origin: '*', // Permitir requisições para API de qualquer origem (URL) (Segurança colocar o domínio do front-end 'http://meufrontend.com')
+})
 
 app.register(fastifySwagger, { // fastifySwagger é um plugin que gera a documentação da API	
   swagger: { // Configuração do plugin
@@ -45,6 +50,6 @@ app.register(getEventAttendees) // Registrar a rota de busca todos participantes
 
 app.setErrorHandler(errorHandler)
 
-app.listen({ port: 3333 }).then(() => {
+app.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
   console.log('HTTP server is running on port 3333');
 });
