@@ -10,6 +10,8 @@ export async function checkIn (app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .get('/attendees/:attendeeId/check-in', {
       schema: {
+        summary: 'Check-in an attendee', // Resumo da rota
+        tags: ['check-ins'], // Tags para a documentação da API
         params: z.object({
           attendeeId: z.coerce.number().int()
         }),

@@ -24,6 +24,8 @@ export async function createEvent(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>() // Adicionar o tipo de provider do Zod
     .post('/events', { // Criar um evento com a tabela Event (schema.prisma)
       schema: { // Definir o schema de validação
+        summary: 'Create a new event', // Resumo da rota
+        tags: ['events'], // Tags para a documentação da API
         body: z.object({ // Validar pelo fastify o corpo da requisição se está de acordo com o schema
           title: z.string().min(4),
           details: z.string().nullable(),

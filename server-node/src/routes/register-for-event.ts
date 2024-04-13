@@ -9,6 +9,8 @@ export async function registerForEvent(app: FastifyInstance) {
     // Cadastrando uma nova informação (participante com a tabela attendees no schema.prisma) em um evento específico
     .post('/events/:eventId/attendees', { // :eventId (No festify : é um coringa para receber uma informção dinamica)
       schema: {
+        summary: 'Register an attendee', // Resumo da rota
+        tags: ['attendees'], // Tags para a documentação da API
         body: z.object({
           name: z.string().min(4),
           email: z.string().email(),
