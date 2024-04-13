@@ -28,8 +28,8 @@ model Attendee {
 
   // Chave estrageira para o evento
   // Ou seja, existe um relacionamento do campo id da tabela Event com o campo eventId da tabela Attendee
-  event   Event     @relation(fields: [eventId], references: [id])
-  checkIn CheckIn?  // Define a relação entre o participante e o check-in 
+  event   Event    @relation(fields: [eventId], references: [id], onDelete: Cascade) // onDelete: Cascade define que ao deletar um evento, todos os participantes também serão deletados
+  checkIn CheckIn? // Define a relação entre o participante e o check-in 
 
   @@unique([eventId, email]) // Permite criar uma chave de verificação única para os campos da tabela (Não poderá ter dois participantes com o mesmo email no mesmo evento)
   @@map("attendees")
@@ -40,8 +40,8 @@ model CheckIn {
   createdAt DateTime @default(now()) @map("created_at")
 
   // Chave estrangeira para o participante attendee Attendee
-  attendee   Attendee @relation(fields: [attendeeId], references: [id])
-  attendeeId Int @map("attendee_id") @unique
+  attendee   Attendee @relation(fields: [attendeeId], references: [id], onDelete: Cascade) // onDelete: Cascade define que ao deletar um check-in, o participante também será deletado
+  attendeeId Int      @unique @map("attendee_id")
 
   @@map("check_ins")
 }
