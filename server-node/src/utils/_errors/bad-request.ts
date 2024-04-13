@@ -1,0 +1,1 @@
+export class BadRequest extends Error {} // Criar uma classe BadRequest que extende de Error

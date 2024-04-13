@@ -5,7 +5,7 @@ Content-Type: application/json
 
 # Corpo da requisição
 {
-  "title": "New event 2",
+  "title": 123,
   "details": null,
   "maximumAttendees": 1
 }

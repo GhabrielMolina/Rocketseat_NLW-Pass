@@ -3,6 +3,7 @@ import { z } from "zod"; // npm i zod (Validação dos dados da requisição)
 import { generateSlug } from "../utils/generate-slug";
 import { prisma } from "../lib/prisma";
 import { FastifyInstance } from "fastify";
+import { BadRequest } from "../utils/_errors/bad-request";
 
 // Métodos HTTP: GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD, ...
 
@@ -53,7 +54,7 @@ export async function createEvent(app: FastifyInstance) {
       })
 
       if (eventWithSameSlug != null) { // Caso o eventWithSameSlug não seja nulo, já existe um evento com o mesmo slug
-        throw new Error('Another event with same title already exists.')
+        throw new BadRequest('Another event with same title already exists.')
       }
 
       const event = await prisma.event.create({ // Create retorna uma Promise por isso o await

@@ -11,6 +11,7 @@ import { getEvent } from './routes/get-event';
 import { getAttendeeBadge } from './routes/get-attendee-badge';
 import { checkIn } from './routes/check-in';
 import { getEventAttendees } from './routes/get-event-attendees';
+import { errorHandler } from './error-handler';
 
 const app = fastify();
 
@@ -41,6 +42,8 @@ app.register(getEvent) // Registrar a rota de dados dos eventos
 app.register(getAttendeeBadge) // Registrar a rota de dados dos participantes
 app.register(checkIn) // Registrar a rota de check-in de participantes
 app.register(getEventAttendees) // Registrar a rota de busca todos participantes de um evento
+
+app.setErrorHandler(errorHandler)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('HTTP server is running on port 3333');
